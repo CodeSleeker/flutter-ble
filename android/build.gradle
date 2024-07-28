@@ -1,0 +1,66 @@
+group 'com.tech.flutter_ble'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.3.1'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.22"
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+android {
+    if (project.android.hasProperty("namespace")) {
+        namespace 'com.tech.flutter_ble'
+    }
+
+    compileSdkVersion 33
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+
+    defaultConfig {
+        minSdkVersion 19
+    }
+
+    dependencies {
+        implementation 'com.polidea.rxandroidble2:rxandroidble:1.16.0'
+        implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+        implementation 'io.reactivex.rxjava2:rxkotlin:2.4.0'
+        implementation 'com.google.android.gms:play-services-location:21.2.0'
+
+        implementation "org.jetbrains.kotlin:kotlin-stdlib:1.9.22"
+        constraints {
+            implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.22") {
+                because("kotlin-stdlib-jdk7 is now a part of kotlin-stdlib, we constrain to remove duplicate classes")
+            }
+            implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.9.22") {
+                because("kotlin-stdlib-jdk8 is now a part of kotlin-stdlib, we constrain to remove duplicate classes")
+            }
+        }
+    }
+}

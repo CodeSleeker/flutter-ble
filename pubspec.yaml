@@ -1,0 +1,37 @@
+name: flutter_ble
+description: "A flutter plugin for Bluetooth Low Energy"
+version: 1.0.0
+homepage:
+
+environment:
+  sdk: '>=3.2.3 <4.0.0'
+  flutter: '>=3.3.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_web_plugins:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.1
+
+flutter:
+  plugin:
+    platforms:
+      android:
+        package: com.tech.flutter_ble
+        pluginClass: FlutterBlePlugin
+      ios:
+        pluginClass: FlutterBlePlugin
+      linux:
+        pluginClass: FlutterBlePlugin
+      macos:
+        pluginClass: FlutterBlePlugin
+      windows:
+        pluginClass: FlutterBlePluginCApi
+      web:
+        pluginClass: FlutterBleWeb
+        fileName: flutter_ble_web.dart
