@@ -1,3 +1,4 @@
 ## 1.0.0
-
-* TODO: Describe initial release.
+* Initial release.
+## 1.0.1
+* Updated package name
