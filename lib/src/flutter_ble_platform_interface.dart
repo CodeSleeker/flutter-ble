@@ -6,8 +6,8 @@
 
 import 'dart:async';
 
-import 'package:flutter_ble/flutter_ble.dart';
-import 'package:flutter_ble/src/flutter_ble_method_channel.dart';
+import 'package:simple_flutter_ble/simple_flutter_ble.dart';
+import 'package:simple_flutter_ble/src/flutter_ble_method_channel.dart';
 
 abstract class FlutterBlePlatform {
   static FlutterBlePlatform instance = MethodChannelFlutterBle();

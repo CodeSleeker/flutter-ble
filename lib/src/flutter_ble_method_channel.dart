@@ -3,8 +3,8 @@
 // import '../flutter_ble_platform_interface.dart';
 
 import 'package:flutter/services.dart';
-import 'package:flutter_ble/flutter_ble.dart';
-import 'package:flutter_ble/src/flutter_ble_platform_interface.dart';
+import 'package:simple_flutter_ble/simple_flutter_ble.dart';
+import 'package:simple_flutter_ble/src/flutter_ble_platform_interface.dart';
 
 class MethodChannelFlutterBle extends FlutterBlePlatform {
   final channel = const MethodChannel('com.tech.flutter_ble/ble');

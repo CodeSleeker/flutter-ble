@@ -1,4 +1,4 @@
-part of '../../flutter_ble.dart';
+part of '../../simple_flutter_ble.dart';
 
 class BLEResponse {
   bool? success;

@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_ble/flutter_ble.dart';
+import 'package:simple_flutter_ble/simple_flutter_ble.dart';
 
 void main() {
   runApp(const MyApp());
