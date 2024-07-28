@@ -1,4 +1,4 @@
-# flutter_ble
+# simple_flutter_ble
 
 Flutter plugin for Bluetooth Low Energy
 
