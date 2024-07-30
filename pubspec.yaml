@@ -1,6 +1,6 @@
 name: simple_flutter_ble
 description: "A flutter plugin for Bluetooth Low Energy"
-version: 1.0.2
+version: 1.0.3
 repository: https://github.com/CodeSleeker/simple-flutter-ble
 
 environment:

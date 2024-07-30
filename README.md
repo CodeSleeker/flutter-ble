@@ -6,7 +6,7 @@ Flutter plugin for Bluetooth Low Energy
 
 * Can also discover devices based on the given list of service uuids
 * Listen to bluetooth connection changes
-* Can send data and listen to response.
+* Can send data and wait for the response.
 * Listen to device connection changes
 * Subscribe to notification
 
