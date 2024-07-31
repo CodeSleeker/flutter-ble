@@ -1,98 +1,53 @@
 part of '../../simple_flutter_ble.dart';
 
-class BLEDevice {
+abstract class BLEDevice {
+  ///Device name
   String? name;
+
+  ///Device mac address
   String? address;
+
+  ///Service uuids available
   List<String>? serviceUuids;
+
+  ///Device status
   bool? online;
+
+  ///Device pairing status
   bool? paired;
+
+  ///Device signal strength
   int? rssi;
+
+  ///Device previous status
   bool? oldStatus;
-  String? server;
+
+  ///First connection status
   bool? firstConnect;
 
-  final StreamController<bool> _statusController = StreamController.broadcast();
-  Stream<bool> get status {
-    // FlutterBlePlatform.instance.connect(address!);
-    FlutterBlePlatform.instance.status.listen(_updateStatus);
-    return _statusController.stream;
+  ///Convert json to BLEDevice
+  factory BLEDevice.fromJson(Map<dynamic, dynamic> data) {
+    return BLEDeviceImp.fromJson(data);
   }
 
-  final StreamController _notifyController = StreamController.broadcast();
-  Stream notify(String uuid) {
-    FlutterBlePlatform.instance.notify(address!, uuid);
-    FlutterBlePlatform.instance.onNotify.listen(_updateNotification);
-    return _notifyController.stream;
-  }
+  ///Listen to device status
+  Stream<bool> get status;
 
-  void _updateNotification(dynamic data) {
-    _notifyController.sink.add(data);
-  }
+  ///Listen to notification
+  Stream notify(String uuid);
 
-  void _updateStatus(Map<dynamic, dynamic> device) {
-    if (device['address'].toString() == address) {
-      online = device['status'];
-      _statusController.sink.add(online!);
-    }
-  }
+  ///Connect to device
+  Future<bool> connect({int retryCount = 1});
 
-  BLEDevice({
-    this.online,
-    this.serviceUuids,
-    this.name,
-    this.address,
-    this.rssi,
-    this.oldStatus,
-    this.server,
-    this.firstConnect,
-  });
+  ///Disconnect from device
+  Future<bool> disconnect();
 
-  @override
-  BLEDevice.fromJson(Map<dynamic, dynamic> json) {
-    name = json['name'];
-    address = json['address'];
-    serviceUuids = json['service_uuids'] == null ? [] : toList(json['service_uuids']);
-    online = json['online'];
-    rssi = json['rssi'];
-    oldStatus = json['old_status'];
-    server = json['server'];
-    firstConnect = json['first_connect'];
-  }
+  ///Send data
+  Future<bool> write(String uuid, dynamic value);
 
-  static List<String> toList(List<dynamic> list) {
-    List<String> services = [];
-    for (var element in list) {
-      services.add(element.toString());
-    }
-    return services;
-  }
+  ///Read data
+  Future<dynamic> read(String uuid);
 
-  static List<BLEDevice> fromList(Map<dynamic, dynamic> list) {
-    List<BLEDevice> devices = [];
-    list.forEach((key, value) {
-      devices.add(BLEDevice.fromJson(value));
-    });
-    return devices;
-  }
-
-  Future<bool> connect({int retryCount = 1}) async {
-    return await FlutterBlePlatform.instance.connect(address!, retryCount);
-  }
-
-  Future<bool> disconnect() async {
-    paired = false;
-    return await FlutterBlePlatform.instance.disconnect(address!);
-  }
-
-  Future<bool> write(String uuid, dynamic value) async {
-    return await FlutterBlePlatform.instance.write(address!, uuid, value);
-  }
-
-  Future<dynamic> read(String uuid) async {
-    return await FlutterBlePlatform.instance.read(address!, uuid);
-  }
-
-  Future<dynamic> writeWithResponse(String uuid, dynamic value) async {
-    return await FlutterBlePlatform.instance.writeWithResponse(address!, uuid, value);
-  }
+  ///Send data and wait for response
+  Future<dynamic> writeWithResponse(String uuid, dynamic value);
 }

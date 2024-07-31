@@ -35,7 +35,7 @@ class _MyAppState extends State<MyApp> implements DeviceListener {
     });
     flutterBle.startBluetoothListener();
     //Listen to bluetooth connection changes
-    flutterBle.onBluetooth.listen((bool status) {
+    flutterBle.onBluetoothConnection.listen((bool status) {
       //bluetooth connection changes
     });
 
@@ -63,7 +63,9 @@ class _MyAppState extends State<MyApp> implements DeviceListener {
                       Container(
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: (device.online ?? false) ? Colors.green : Colors.redAccent,
+                          color: (device.online ?? false)
+                              ? Colors.green
+                              : Colors.redAccent,
                         ),
                         width: 10,
                         height: 10,
@@ -88,7 +90,8 @@ class _MyAppState extends State<MyApp> implements DeviceListener {
                               onPressed: () {
                                 device.write('uuid', '<dynamic data>');
                                 //you can also wait for the response
-                                var data = device.writeWithResponse('uuid', '<dynamic data>');
+                                var data = device.writeWithResponse(
+                                    'uuid', '<dynamic data>');
                               },
                               child: const Text('Send data'),
                             )

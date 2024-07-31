@@ -1,7 +1,3 @@
-// import 'package:flutter/services.dart';
-// import 'package:flutter_ble/models/ble_response.dart';
-// import '../flutter_ble_platform_interface.dart';
-
 import 'package:flutter/services.dart';
 import 'package:simple_flutter_ble/simple_flutter_ble.dart';
 import 'package:simple_flutter_ble/src/flutter_ble_platform_interface.dart';
@@ -31,7 +27,8 @@ class MethodChannelFlutterBle extends FlutterBlePlatform {
 
   @override
   Future<bool> connect(String address, int retryCount) async {
-    return await channel.invokeMethod('connect_device', {'address': address, 'retry_count': retryCount});
+    return await channel.invokeMethod(
+        'connect_device', {'address': address, 'retry_count': retryCount});
   }
 
   @override
@@ -56,18 +53,22 @@ class MethodChannelFlutterBle extends FlutterBlePlatform {
 
   @override
   Future<bool> write(String address, String uuid, value) async {
-    return await channel.invokeMethod('write_characteristic', {'address': address, 'uuid': uuid, 'value': value});
+    return await channel.invokeMethod('write_characteristic',
+        {'address': address, 'uuid': uuid, 'value': value});
   }
 
   @override
-  Future<BLEResponse> writeWithResponse(String address, String uuid, value) async {
-    var data = await channel.invokeMethod('write_characteristic_with_response', {'address': address, 'uuid': uuid, 'value': value});
+  Future<BLEResponse> writeWithResponse(
+      String address, String uuid, value) async {
+    var data = await channel.invokeMethod('write_characteristic_with_response',
+        {'address': address, 'uuid': uuid, 'value': value});
     return BLEResponse.fromJson(data);
   }
 
   @override
   Future<BLEResponse> read(String address, String uuid) async {
-    var data = await channel.invokeMethod('read_characteristic', {'address': address, 'uuid': uuid});
+    var data = await channel.invokeMethod(
+        'read_characteristic', {'address': address, 'uuid': uuid});
     return BLEResponse.fromJson(data);
   }
 

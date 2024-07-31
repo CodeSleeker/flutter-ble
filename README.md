@@ -60,7 +60,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> implements DeviceListener{
- FlutterBle ble = FlutterBle();
+ FlutterBle flutterBle = FlutterBle();
  @override
  void initState() {
   super.initState();
